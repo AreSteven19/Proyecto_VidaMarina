@@ -8,9 +8,10 @@ import {
     TextInput,
     View,
     SafeAreaView,
+    FlatList ,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import YoutubePlayer from 'react-native-youtube-iframe';
 export default function Inicio() {
     const navigation = useNavigation();
     const [checkbox1, setCheckbox1] = useState(false);
@@ -58,12 +59,24 @@ export default function Inicio() {
                         <Text style={styles.boton}>Acerca de</Text>
                            </TouchableOpacity >
                            </View>
+
+                           <View style={styles.video}>
+                           <YoutubePlayer
+                    height={300}
+                    width={"%100"}
+                    marginTop={700}
+                    play={false}
+                    videoId={'PDJwWzH96u0'} // ID del video de YouTube
+                />
+                </View>
+
+                <View style={styles.consejos}>
+
+                </View>
                            
                        
 
-                 
-
-  
+                
 
                 <StatusBar style="auto" />
             </View>
@@ -80,6 +93,11 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         paddingTop: 10,
         backgroundColor: "#2D6EFF",
+    },
+
+    video: {
+        marginTop: 20
+        
     },
     botonelejido:{
       
