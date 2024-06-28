@@ -27,8 +27,6 @@ export default function Registro() {
     Confirm: "",
   };
 
-
-
   const [EstadoUsuario, setEstado] = useState(DatosUsuario);
 
   const HandleChangeText = (value, name) => {
@@ -49,6 +47,7 @@ export default function Registro() {
     }
 
     try {
+      // Crear usuario en Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         EstadoUsuario.Correo,
@@ -56,6 +55,7 @@ export default function Registro() {
       );
       const user = userCredential.user;
 
+      // Almacenar información adicional en Firestore
       await addDoc(collection(db, "Usuario"), {
         uid: user.uid,
         Nombre: EstadoUsuario.Nombre,

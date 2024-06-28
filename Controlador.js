@@ -6,6 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 //Componentes de las paginas
 import Login from './Navegacion/Login';
 import Registro from './Navegacion/Register';
+import Inicio from './Navegacion/Inicio';
+import Recuperar from './Navegacion/Recuperar';
 
 
 
@@ -25,6 +27,17 @@ function Controlrutas() {
                <Stack.Screen
                 name="Registro"
                 component={Registro}
+                options={{ headerBackTitleVisible: false, headerShown: false }}
+            />
+
+<Stack.Screen
+                name="Inicio"
+                component={Inicio}
+                options={{ headerBackTitleVisible: false, headerShown: false }}
+            />
+             <Stack.Screen
+                name="Recuperar"
+                component={Recuperar}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 

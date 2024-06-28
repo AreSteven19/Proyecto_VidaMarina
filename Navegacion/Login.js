@@ -30,7 +30,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       Alert.alert("Éxito", "Inicio de sesión exitoso."); 
-      navigation.navigate("Main");
+      navigation.navigate("Inicio");
     } catch (error) {
      
       Alert.alert("Correo Electronico o contraseña incorrectos");
@@ -59,7 +59,7 @@ export default function Login() {
         value={password}
       />
 
-      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Recuperar")}>
         <Text style={styles.txtRegistrarse}>¿Has olvidado tu contraseña?</Text>
       </TouchableOpacity>
 
