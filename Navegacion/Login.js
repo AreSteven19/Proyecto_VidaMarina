@@ -37,7 +37,7 @@ export default function Login() {
           style={styles.txtInput}
         ></TextInput>
 
-<TouchableOpacity onPress={() => navigation.navigate("Registro")}>
+<TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <Text style={styles.txtRegistrarse}>¿Has olvidado tu contraseña?</Text>
         </TouchableOpacity>
 
@@ -51,6 +51,15 @@ export default function Login() {
             <Text style={styles.txtLogin}>Iniciar Sesion</Text>
           </LinearGradient>
         </TouchableOpacity>
+
+       
+        <View style={styles.contenedorreg}>
+          <Text>No tienes cuenta.</Text>
+          <TouchableOpacity>
+            <Text style={styles.botonregis}>Registrarse</Text>
+          </TouchableOpacity>
+
+        </View>
 
         
 
@@ -150,4 +159,21 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 30,
   },
+
+  contenedorreg:{
+display: "flex",
+flexDirection: "row",
+marginTop: 40
+  },
+
+  botonregis:{
+    
+   
+    color: "#02A3C7",
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingLeft: 10
+   
+  }
+  
 });

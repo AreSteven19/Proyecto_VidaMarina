@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
@@ -22,8 +23,10 @@ export default function Registro() {
 
   const DatosUsuario = {
     Nombre: "",
+    Numero: "",
     Correo: "",
     Contra: "",
+    Confirm: "",
   };
 
   const [EstadoUsuario, setEstado] = useState(DatosUsuario);
@@ -33,9 +36,14 @@ export default function Registro() {
   };
 
   const EnviarDatosFirebase = async () => {
+    if (EstadoUsuario.Contra !== EstadoUsuario.Confirm) {
+      Alert.alert("Error", "La confirmación de la contraseña no coincide.");
+      return;
+    }
+
     try {
-      alert("Registro del producto exitoso");
       const docRef = await addDoc(collection(db, "Usuario"), EstadoUsuario);
+      alert("Registro del producto exitoso");
       navigation.navigate("Login");
     } catch (e) {
       console.error("No se pudo agregar los datos a la base de datos", e);
@@ -47,12 +55,12 @@ export default function Registro() {
       <View style={styles.container}>
         <View style={styles.nav}>
           <Image style={styles.ImageLog} source={require("../images/logo.jpg")} />
-          <Text style={styles.textologo}>Registro</Text>
+          <Text style={styles.textologo}>Ingresar Registro</Text>
         </View>
 
         <View style={styles.inputs}>
           <View style={styles.inputytext}>
-            <Text style={styles.label}>Nombre</Text>
+            <Text style={styles.label}>Ingresar Nombre de Usuario</Text>
             <TextInput
               placeholder="Nombre Usuario"
               style={styles.txtInput}
@@ -62,23 +70,43 @@ export default function Registro() {
           </View>
 
           <View style={styles.inputytext}>
-            <Text style={styles.label}>Correo Electrónico</Text>
+            <Text style={styles.label}>Ingresar Número Télefonico</Text>
             <TextInput
-              placeholder="Correo Electrónico"
+              placeholder="Número de télefono"
+              style={styles.txtInput}
+              onChangeText={(value) => HandleChangeText(value, "Numero")}
+              value={EstadoUsuario.Numero}
+            />
+          </View>
+
+          <View style={styles.inputytext}>
+            <Text style={styles.label}>Ingresar Correo</Text>
+            <TextInput
+              placeholder="Correo"
               style={styles.txtInput}
               onChangeText={(value) => HandleChangeText(value, "Correo")}
               value={EstadoUsuario.Correo}
             />
           </View>
-
           <View style={styles.inputytext}>
-            <Text style={styles.label}>Contraseña</Text>
+            <Text style={styles.label}>Ingresar Contraseña</Text>
             <TextInput
               placeholder="Contraseña"
               secureTextEntry={true}
               style={styles.txtInput}
               onChangeText={(value) => HandleChangeText(value, "Contra")}
               value={EstadoUsuario.Contra}
+            />
+          </View>
+
+          <View style={styles.inputytext}>
+            <Text style={styles.label}>Confirmar contraseña</Text>
+            <TextInput
+              placeholder="Confirmar contraseña"
+              secureTextEntry={true}
+              style={styles.txtInput}
+              onChangeText={(value) => HandleChangeText(value, "Confirm")}
+              value={EstadoUsuario.Confirm}
             />
           </View>
 
@@ -118,6 +146,7 @@ const styles = StyleSheet.create({
   ImageLog: {
     height: 50,
     width: 50,
+    borderRadius: 70,
   },
   txtTitulo: {
     fontSize: 40,
@@ -183,9 +212,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontWeight: "bold",
   },
-  inputs: {
-    marginTop: 40,
-  },
+  
   inputytext: {
     width: "100%",
   },
