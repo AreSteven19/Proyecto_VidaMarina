@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -12,14 +12,12 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-
-import app from "../ConexionDB";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../ConexionDB"; // Asegúrate de importar correctamente
 
 export default function Registro() {
   const navigation = useNavigation();
-  const db = getFirestore(app);
 
   const DatosUsuario = {
     Nombre: "",
@@ -41,12 +39,35 @@ export default function Registro() {
       return;
     }
 
+    for (const key in EstadoUsuario) {
+      if (EstadoUsuario[key].trim() === "") {
+        Alert.alert("Error", `El campo ${key} está vacío.`);
+        return;
+      }
+    }
+
     try {
-      const docRef = await addDoc(collection(db, "Usuario"), EstadoUsuario);
-      alert("Registro del producto exitoso");
+      // Crear usuario en Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        EstadoUsuario.Correo,
+        EstadoUsuario.Contra
+      );
+      const user = userCredential.user;
+
+      // Almacenar información adicional en Firestore
+      await addDoc(collection(db, "Usuario"), {
+        uid: user.uid,
+        Nombre: EstadoUsuario.Nombre,
+        Numero: EstadoUsuario.Numero,
+        Correo: EstadoUsuario.Correo,
+      });
+
+      Alert.alert("Registro exitoso");
       navigation.navigate("Login");
     } catch (e) {
-      console.error("No se pudo agregar los datos a la base de datos", e);
+      console.error("No se pudo registrar el usuario", e);
+      Alert.alert("Error", e.message);
     }
   };
 
@@ -72,7 +93,7 @@ export default function Registro() {
           <View style={styles.inputytext}>
             <Text style={styles.label}>Ingresar Número Télefonico</Text>
             <TextInput
-              placeholder="Número de télefono"
+              placeholder="Número de teléfono"
               style={styles.txtInput}
               onChangeText={(value) => HandleChangeText(value, "Numero")}
               value={EstadoUsuario.Numero}
@@ -212,7 +233,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontWeight: "bold",
   },
-  
   inputytext: {
     width: "100%",
   },

@@ -1,9 +1,10 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+
+import { initializeApp } from "firebase/app";
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDQEE3_oqZWg_cX-GmSOjFxUOri_wyDua8",
   authDomain: "db-vidamarina.firebaseapp.com",
@@ -13,5 +14,7 @@ const firebaseConfig = {
   appId: "1:246698494086:web:b453401d34ba6b3b426907"
 };
 
-// Initialize Firebase
+
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
