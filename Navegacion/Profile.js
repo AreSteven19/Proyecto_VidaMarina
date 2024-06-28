@@ -34,7 +34,7 @@ export default function Profile() {
             </TouchableOpacity>
             {showOptions && (
                 <View style={styles.optionsContainer}>
-                    <TouchableOpacity style={styles.option}>
+                    <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("Ayuda")}>
                         <Image source={require('../images/ayuda.png')} style={styles.iconPerfil} />
                         <Text style={styles.optionText}>Ayuda</Text>
                     </TouchableOpacity>
