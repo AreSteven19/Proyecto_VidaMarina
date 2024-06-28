@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Inicio() {
+export default function Acerca() {
     const navigation = useNavigation();
     const [checkbox1, setCheckbox1] = useState(false);
     const [checkbox2, setCheckbox2] = useState(false);
@@ -45,8 +45,8 @@ export default function Inicio() {
 
                     
                         <View style={styles.botones}>
-                        <TouchableOpacity  onPress={() => navigation.navigate("Inicio")} style={styles.btnLoginElejido} >
-                        <Text style={styles.botonelejido}>Inicio</Text>
+                        <TouchableOpacity  onPress={() => navigation.navigate("Inicio")} style={styles.btnLogin} >
+                        <Text style={styles.boton}>Inicio</Text>
                            </TouchableOpacity  >
                            <TouchableOpacity  onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
                         <Text style={styles.boton}>Beneficios</Text>
@@ -54,8 +54,8 @@ export default function Inicio() {
                            <TouchableOpacity  onPress={() => navigation.navigate("Paises")} style={styles.btnLogin}>
                         <Text style={styles.boton}>Paises</Text>
                            </TouchableOpacity>
-                           <TouchableOpacity  onPress={() => navigation.navigate("Acerca")} style={styles.btnLogin}>
-                        <Text style={styles.boton}>Acerca de</Text>
+                           <TouchableOpacity  onPress={() => navigation.navigate("Acerca")} style={styles.btnLoginElejido}>
+                        <Text style={styles.botonelejido}>Acerca de</Text>
                            </TouchableOpacity >
                            </View>
                            
