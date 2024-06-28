@@ -8,6 +8,7 @@ import Login from './Navegacion/Login';
 import Registro from './Navegacion/Register';
 import Inicio from './Navegacion/Inicio';
 import Recuperar from './Navegacion/Recuperar';
+import Profile from './Navegacion/Profile';
 
 import Beneficios from './Navegacion/Beneficios';
 import Paises from "./Navegacion/Paises"; './Navegacion/Recuperar';
@@ -60,6 +61,11 @@ function Controlrutas() {
 <Stack.Screen
                 name="Acerca"
                 component={Acerca}
+                options={{ headerBackTitleVisible: false, headerShown: false }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
