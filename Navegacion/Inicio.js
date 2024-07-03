@@ -8,79 +8,92 @@ import {
     TextInput,
     View,
     SafeAreaView,
-    FlatList ,
+    FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import YoutubePlayer from 'react-native-youtube-iframe';
+
+const consejos = [
+    { id: '1', consejo: 'Reduce el uso de plásticos de un solo uso.' },
+    { id: '2', consejo: 'Participa en limpiezas de playas.' },
+    { id: '3', consejo: 'Usa productos de limpieza ecológicos.' },
+    { id: '4', consejo: 'Elige productos de pesca sostenible.' },
+    { id: '5', consejo: 'Educa a otros sobre la importancia de los océanos.' },
+];
+
 export default function Inicio() {
     const navigation = useNavigation();
     const [checkbox1, setCheckbox1] = useState(false);
     const [checkbox2, setCheckbox2] = useState(false);
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
+    const renderItem = ({ item }) => (
+        <View style={styles.row}>
+            <View style={styles.cell}>
+                <Text style={styles.cellText}>Consejo {item.id}</Text>
+            </View>
+            <View style={styles.cell}>
+                <Text style={styles.cellText}>{item.consejo}</Text>
+            </View>
+        </View>
+    );
 
-                <View style={styles.nav}>
-
-                    <View style={styles.izquierda}>
-                        <Text style={styles.textologo} >Vida marina</Text>
-                        <Image style={styles.ImageLog} source={require("../images/logo.jpg")} />
-                    </View>
-
-                    <View style={styles.derecha}>
-
-                        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                        <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
-
-                        </TouchableOpacity>
-                        <TextInput
-                            placeholder="Buscar"
-                            style={styles.txtInput}
-                        ></TextInput>
-
-                    </View>
-
+    const ListHeader = () => (
+        <>
+            <View style={styles.nav}>
+                <View style={styles.izquierda}>
+                    <Text style={styles.textologo}>Vida marina</Text>
+                    <Image style={styles.ImageLog} source={require("../images/logo.jpg")} />
                 </View>
+                <View style={styles.derecha}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                        <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
+                    </TouchableOpacity>
+                    <TextInput
+                        placeholder="Buscar"
+                        style={styles.txtInput}
+                    ></TextInput>
+                </View>
+            </View>
 
+            <View style={styles.botones}>
+                <TouchableOpacity onPress={() => navigation.navigate("Inicio")} style={styles.btnLoginElejido}>
+                    <Text style={styles.botonelejido}>Inicio</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
+                    <Text style={styles.boton}>Beneficios</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Paises")} style={styles.btnLogin}>
+                    <Text style={styles.boton}>Paises</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Acerca")} style={styles.btnLogin}>
+                    <Text style={styles.boton}>Acerca de</Text>
+                </TouchableOpacity>
+            </View>
 
-
-                    
-                        <View style={styles.botones}>
-                        <TouchableOpacity  onPress={() => navigation.navigate("Inicio")} style={styles.btnLoginElejido} >
-                        <Text style={styles.botonelejido}>Inicio</Text>
-                           </TouchableOpacity  >
-                           <TouchableOpacity  onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
-                        <Text style={styles.boton}>Beneficios</Text>
-                           </TouchableOpacity>
-                           <TouchableOpacity  onPress={() => navigation.navigate("Paises")} style={styles.btnLogin}>
-                        <Text style={styles.boton}>Paises</Text>
-                           </TouchableOpacity>
-                           <TouchableOpacity  onPress={() => navigation.navigate("Acerca")} style={styles.btnLogin}>
-                        <Text style={styles.boton}>Acerca de</Text>
-                           </TouchableOpacity >
-                           </View>
-
-                           <View style={styles.video}>
-                           <YoutubePlayer
-                    height={300}
-                    width={"%100"}
-                    marginTop={700}
+            <View style={styles.video}>
+                <YoutubePlayer
+                    height={250}
+                    width={"100%"}
                     play={false}
                     videoId={'PDJwWzH96u0'} // ID del video de YouTube
                 />
-                </View>
-
-                <View style={styles.consejos}>
-
-                </View>
-                           
-                       
-
-                
-
-                <StatusBar style="auto" />
             </View>
+
+            <View style={styles.consejosHeaderContainer}>
+                <Text style={styles.header}>Consejos Importantes</Text>
+            </View>
+        </>
+    );
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                data={consejos}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                ListHeaderComponent={ListHeader}
+            />
+            <StatusBar style="auto" />
         </SafeAreaView>
     );
 }
@@ -95,36 +108,27 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         backgroundColor: "#2D6EFF",
     },
-
     video: {
         marginTop: 20
-        
     },
-    botonelejido:{
-      
-        fontSize:13,
+    botonelejido: {
+        fontSize: 13,
         color: "#FFFFFF",
         textAlign: "center",
-     
-
     },
-    botones:{
+    botones: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
         marginTop: 20,
-    
     },
-    boton:{
-      
-        fontSize:13,
+    boton: {
+        fontSize: 13,
         color: "#000000",
         textAlign: "center",
-     
-
     },
     container: {
-        height: "100%",
+        flex: 1,
     },
     izquierda: {
         display: "flex",
@@ -140,7 +144,6 @@ const styles = StyleSheet.create({
         width: 180,
         marginRight: 8,
         padding: 10,
-
     },
     nav: {
         display: "flex",
@@ -166,7 +169,6 @@ const styles = StyleSheet.create({
         width: 60,
         marginLeft: 100,
         borderRadius: 70,
-
     },
     btnLogin: {
         borderRadius: 60,
@@ -215,6 +217,50 @@ const styles = StyleSheet.create({
         color: "#000000",
         backgroundColor: "#FFFFFF",
         fontSize: 17,
+    },
+    consejos: {
+        backgroundColor: "#02A3C7",
+        padding: 10,
+        borderRadius: 10,
+
+        marginHorizontal: 10,
+    },
+    consejosHeaderContainer: {
+        backgroundColor: "#02A3C7",
+        padding: 10,
+        borderRadius: 10,
+     
+        marginHorizontal: 10,
+    },
+    header: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#FFFFFF",
+        textAlign: "center",
+        marginBottom: 10,
+    },
+    table: {
+        borderWidth: 1,
+        borderColor: '#000000',
+        borderRadius: 10,
+    },
+    row: {
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderColor: '#000000',
+    },
+    cell: {
+        flex: 1,
+        padding: 10,
+        borderRightWidth: 1,
+        borderColor: '#000000',
+    },
+    cellText: {
+        fontSize: 16,
+        color: "#000000",
+    },
+    lastCell: {
+        borderRightWidth: 0,
     },
 });
 
