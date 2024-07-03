@@ -68,13 +68,8 @@ function Controlrutas() {
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
-            <Stack.Screen
-                name="Profile"
-                component={Profile}
-                options={{ headerBackTitleVisible: false, headerShown: false }}
-            />
 
-<Stack.Screen
+            <Stack.Screen
                 name="Ayudajs"
                 component={Ayudajs}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
