@@ -69,7 +69,7 @@ function Controlrutas() {
             />
 
 
-<Stack.Screen
+            <Stack.Screen
                 name="Ayudajs"
                 component={Ayudajs}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
