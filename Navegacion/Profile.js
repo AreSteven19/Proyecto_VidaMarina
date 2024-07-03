@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
     photoContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#D9D9D9',
         width: 224,
         height: 209,
         padding: 10,
