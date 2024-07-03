@@ -23,13 +23,13 @@ export default function Acerca() {
                 <View style={styles.nav}>
 
                     <View style={styles.izquierda}>
-                        <Text style={styles.textologo} >Vida marina</Text>
+                        <Text style={styles.textologo}>Vida marina</Text>
                         <Image style={styles.ImageLog} source={require("../images/logo.jpg")} />
                     </View>
 
                     <View style={styles.derecha}>
 
-                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                        <TouchableOpacity>
                             <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
                         </TouchableOpacity>
                         <TextInput
@@ -41,29 +41,30 @@ export default function Acerca() {
 
                 </View>
 
-
-
-                    
-                        <View style={styles.botones}>
-                        <TouchableOpacity  onPress={() => navigation.navigate("Inicio")} style={styles.btnLogin} >
+                <View style={styles.botones}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Inicio")} style={styles.btnLogin} >
                         <Text style={styles.boton}>Inicio</Text>
-                           </TouchableOpacity  >
-                           <TouchableOpacity  onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
                         <Text style={styles.boton}>Beneficios</Text>
-                           </TouchableOpacity>
-                           <TouchableOpacity  onPress={() => navigation.navigate("Paises")} style={styles.btnLogin}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Paises")} style={styles.btnLogin}>
                         <Text style={styles.boton}>Paises</Text>
-                           </TouchableOpacity>
-                           <TouchableOpacity  onPress={() => navigation.navigate("Acerca")} style={styles.btnLoginElejido}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Acerca")} style={styles.btnLoginElejido}>
                         <Text style={styles.botonelejido}>Acerca de</Text>
-                           </TouchableOpacity >
-                           </View>
-                           
-                       
+                    </TouchableOpacity>
+                </View>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 10 }}>Acerca de nosotros</Text>
+                <View style={styles.resumenContainer}>
+                    <Text style={styles.resumenTexto}>
+                        Nunca ha habido un mejor momento que este para salvar nuestros océanos. Con problemas graves como la contaminación y la pesca excesiva, queremos hacer un sistema de sensibilización que informe a la población sobre la importancia de salvar nuestros océanos y, al mismo tiempo, recaudar fondos para impulsar los diferentes proyectos que se realizan para salvaguardar la vida marítima.
+                    </Text>
+                    <Text style={styles.resumenTexto}>
+                        A través de nuestro software, cerramos la brecha en el conocimiento sobre la situación de los océanos y lo que se espera de la humanidad para tomar decisiones conscientes y responsables. Nuestra plataforma permite a las personas y empresas donar directamente a iniciativas de conservación y restauración del ecosistema marino, canalizando el dinero a proyectos específicos que trabajan en la eliminación de la contaminación, fomentan la pesca sostenible y permiten la investigación científica en la conservación marina.
+                    </Text>
 
-                 
-
-  
+                </View>
 
                 <StatusBar style="auto" />
             </View>
@@ -81,28 +82,22 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         backgroundColor: "#2D6EFF",
     },
-    botonelejido:{
-      
-        fontSize:13,
+    botonelejido: {
+        fontSize: 13,
         color: "#FFFFFF",
         textAlign: "center",
-     
-
     },
-    botones:{
+    botones: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
         marginTop: 20,
-    
+        marginBottom: 20,
     },
-    boton:{
-      
-        fontSize:13,
+    boton: {
+        fontSize: 13,
         color: "#000000",
         textAlign: "center",
-     
-
     },
     container: {
         height: "100%",
@@ -121,7 +116,6 @@ const styles = StyleSheet.create({
         width: 180,
         marginRight: 8,
         padding: 10,
-
     },
     nav: {
         display: "flex",
@@ -147,7 +141,6 @@ const styles = StyleSheet.create({
         width: 60,
         marginLeft: 100,
         borderRadius: 70,
-
     },
     btnLogin: {
         borderRadius: 60,
@@ -197,5 +190,23 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         fontSize: 17,
     },
+    resumenContainer: {
+        backgroundColor: "#f0f0f0",
+        padding: 20,
+        margin: 20,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    resumenTexto: {
+        fontSize: 16,
+        color: "#333",
+        marginBottom: 10,
+    },
 });
-
