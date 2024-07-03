@@ -30,31 +30,37 @@ export default function Profile() {
         <View style={styles.container}>
             <Text style={styles.title}>Perfil</Text>
             <TouchableOpacity style={styles.settingsIcon} onPress={toggleOptions}>
-                <Image source={require('../images/config.png')} style={styles.pphoto} />
+
+                <Image source={require('../images/config.jpg')} style={styles.pphoto} />
             </TouchableOpacity>
             {showOptions && (
                 <View style={styles.optionsContainer}>
-                    <TouchableOpacity style={styles.option}>
-                        <Image source={require('../images/ayuda.png')} style={styles.iconPerfil} />
+                    <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("Ayudajs")}>
+                        <Image source={require('../images/ayudaimagen.jpg')} style={styles.iconPerfil} />
                         <Text style={styles.optionText}>Ayuda</Text>
                     </TouchableOpacity>
-                    <Text style={{marginLeft:20}}>_________________________________</Text>
+                    <Text style={{marginLeft:20}}>_____________________________</Text>
+
                     <TouchableOpacity style={styles.option}>
                         <Image source={require('../images/notificacion.png')} style={styles.iconPerfil} />
                         <Text style={styles.optionText}>Notificaciones</Text>
                     </TouchableOpacity>
-                    <Text style={{marginLeft:20}}>_________________________________</Text>
+
+                    <Text style={{marginLeft:20}}>_____________________________</Text>
                     <TouchableOpacity style={styles.option}>
-                        <Image source={require('../images/logosesion.png')} style={styles.iconPerfil} />
+                        <Image source={require('../images/logosesion.jpg')} style={styles.iconPerfil} />
+
                         <Text style={styles.optionText}>Cerrar Sesion</Text>
                     </TouchableOpacity>
                 </View>
             )}
             <View style={styles.photoContainer}>
-                <Image source={require('../images/logo_perfil.png')} style={styles.photo} />
+
+                <Image source={require('../images/logouser.jpg')} style={styles.photo} />
                 <Text style={styles.editPhotoText}>Editar Foto +</Text>
             </View>
-            <Text >_________________________________________________</Text>
+            <Text >_____________________________________________</Text>
+
             <Text style={styles.labeltop}>Cambia tus datos y edita tu informacion personal.</Text>
 
             <View style={styles.inputContainer}>

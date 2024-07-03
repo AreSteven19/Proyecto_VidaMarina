@@ -8,11 +8,10 @@ import {
     TextInput,
     View,
     SafeAreaView,
-    FlatList ,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import YoutubePlayer from 'react-native-youtube-iframe';
-export default function Inicio() {
+
+export default function Acerca() {
     const navigation = useNavigation();
     const [checkbox1, setCheckbox1] = useState(false);
     const [checkbox2, setCheckbox2] = useState(false);
@@ -30,9 +29,8 @@ export default function Inicio() {
 
                     <View style={styles.derecha}>
 
-                        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                        <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
-
+                        <TouchableOpacity>
+                            <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
                         </TouchableOpacity>
                         <TextInput
                             placeholder="Buscar"
@@ -47,8 +45,8 @@ export default function Inicio() {
 
                     
                         <View style={styles.botones}>
-                        <TouchableOpacity  onPress={() => navigation.navigate("Inicio")} style={styles.btnLoginElejido} >
-                        <Text style={styles.botonelejido}>Inicio</Text>
+                        <TouchableOpacity  onPress={() => navigation.navigate("Inicio")} style={styles.btnLogin} >
+                        <Text style={styles.boton}>Inicio</Text>
                            </TouchableOpacity  >
                            <TouchableOpacity  onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
                         <Text style={styles.boton}>Beneficios</Text>
@@ -56,28 +54,16 @@ export default function Inicio() {
                            <TouchableOpacity  onPress={() => navigation.navigate("Paises")} style={styles.btnLogin}>
                         <Text style={styles.boton}>Paises</Text>
                            </TouchableOpacity>
-                           <TouchableOpacity  onPress={() => navigation.navigate("Acerca")} style={styles.btnLogin}>
-                        <Text style={styles.boton}>Acerca de</Text>
+                           <TouchableOpacity  onPress={() => navigation.navigate("Acerca")} style={styles.btnLoginElejido}>
+                        <Text style={styles.botonelejido}>Acerca de</Text>
                            </TouchableOpacity >
                            </View>
-
-                           <View style={styles.video}>
-                           <YoutubePlayer
-                    height={300}
-                    width={"%100"}
-                    marginTop={700}
-                    play={false}
-                    videoId={'PDJwWzH96u0'} // ID del video de YouTube
-                />
-                </View>
-
-                <View style={styles.consejos}>
-
-                </View>
                            
                        
 
-                
+                 
+
+  
 
                 <StatusBar style="auto" />
             </View>
@@ -94,11 +80,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         paddingTop: 10,
         backgroundColor: "#2D6EFF",
-    },
-
-    video: {
-        marginTop: 20
-        
     },
     botonelejido:{
       

@@ -9,11 +9,10 @@ import Registro from './Navegacion/Register';
 import Inicio from './Navegacion/Inicio';
 import Recuperar from './Navegacion/Recuperar';
 import Profile from './Navegacion/Profile';
-
 import Beneficios from './Navegacion/Beneficios';
 import Paises from "./Navegacion/Paises"; './Navegacion/Recuperar';
 import Acerca from './Navegacion/Acerca';
-
+import Ayudajs from './Navegacion/Ayudajs';
 
 
 
@@ -29,36 +28,36 @@ function Controlrutas() {
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
-          
-               <Stack.Screen
+
+            <Stack.Screen
                 name="Registro"
                 component={Registro}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
-<Stack.Screen
+            <Stack.Screen
                 name="Inicio"
                 component={Inicio}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
                 name="Recuperar"
                 component={Recuperar}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
-              <Stack.Screen
+            <Stack.Screen
                 name="Beneficios"
                 component={Beneficios}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
-<Stack.Screen
+            <Stack.Screen
                 name="Paises"
                 component={Paises}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
-<Stack.Screen
+            <Stack.Screen
                 name="Acerca"
                 component={Acerca}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
@@ -66,6 +65,18 @@ function Controlrutas() {
             <Stack.Screen
                 name="Profile"
                 component={Profile}
+                options={{ headerBackTitleVisible: false, headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{ headerBackTitleVisible: false, headerShown: false }}
+            />
+
+<Stack.Screen
+                name="Ayudajs"
+                component={Ayudajs}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 
