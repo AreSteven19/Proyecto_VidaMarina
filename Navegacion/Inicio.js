@@ -31,7 +31,8 @@ export default function Inicio() {
                     <View style={styles.derecha}>
 
                         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                            <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
+                        <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
+
                         </TouchableOpacity>
                         <TextInput
                             placeholder="Buscar"
