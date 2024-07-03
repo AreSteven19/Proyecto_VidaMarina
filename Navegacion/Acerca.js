@@ -29,7 +29,7 @@ export default function Acerca() {
 
                     <View style={styles.derecha}>
 
-                        <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                             <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
                         </TouchableOpacity>
                         <TextInput

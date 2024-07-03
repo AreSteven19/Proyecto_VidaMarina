@@ -45,7 +45,7 @@ export default function Paises() {
                     <Image style={styles.ImageLog} source={require("../images/logo.jpg")} />
                 </View>
                 <View style={styles.derecha}>
-                    <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                         <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
                     </TouchableOpacity>
                 </View>
