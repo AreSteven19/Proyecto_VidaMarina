@@ -16,8 +16,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../ConexionDB"
 
 export default function Login() {
+  
+  
   const navigation = useNavigation();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
