@@ -8,6 +8,7 @@ import {
     TextInput,
     View,
     SafeAreaView,
+    ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -18,6 +19,7 @@ export default function Acerca() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <ScrollView>
             <View style={styles.container}>
 
                 <View style={styles.nav}>
@@ -68,6 +70,7 @@ export default function Acerca() {
 
                 <StatusBar style="auto" />
             </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
