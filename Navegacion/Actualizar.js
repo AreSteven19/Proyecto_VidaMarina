@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { db } from '../ConexionDB'; 
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../ConexionDB'; // Asegúrate de importar tu configuración de Firebase
+import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 
-export default function Profile() {
+export default function Actualizar() {
 
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('Are@gmail.com');
+    const [email, setEmail] = useState('Are@gmail.com'); // Inicialmente configurado para el email dado
     const [phone, setPhone] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true); // Comienza en true para mostrar el indicador de carga
+    const [docId, setDocId] = useState(null);
+    const [updating, setUpdating] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
 
     const navigation = useNavigation();
@@ -20,7 +22,9 @@ export default function Profile() {
                 const q = query(collection(db, 'Usuario'), where('Correo', '==', email));
                 const querySnapshot = await getDocs(q);
                 if (!querySnapshot.empty) {
-                    const userData = querySnapshot.docs[0].data();
+                    const userDoc = querySnapshot.docs[0];
+                    const userData = userDoc.data();
+                    setDocId(userDoc.id);
                     setName(userData.Nombre);
                     setPhone(userData.Numero);
                 } else {
@@ -35,6 +39,26 @@ export default function Profile() {
 
         fetchData();
     }, [email]);
+
+    const handleUpdate = async () => {
+        if (docId) {
+            setUpdating(true);
+            try {
+                const userDoc = doc(db, 'Usuario', docId);
+                await updateDoc(userDoc, {
+                    Nombre: name,
+                    Correo: email,
+                    Numero: phone
+                });
+                alert('Información actualizada');
+                setUpdating(false);
+            } catch (error) {
+                console.error("Error updating document: ", error);
+                alert('Error actualizando la información');
+                setUpdating(false);
+            }
+        }
+    };
 
     const closeOptions = () => {
         if (showOptions) {
@@ -57,7 +81,7 @@ export default function Profile() {
     return (
         <TouchableWithoutFeedback onPress={closeOptions}>
             <View style={styles.container}>
-                <Text style={styles.title}>Perfil</Text>
+                <Text style={styles.title}>Actualizar Perfil</Text>
                 <TouchableOpacity style={styles.settingsIcon} onPress={toggleOptions}>
                     <Image source={require('../images/config.jpg')} style={styles.pphoto} />
                 </TouchableOpacity>
@@ -73,7 +97,7 @@ export default function Profile() {
                             <Text style={styles.optionText}>Notificaciones</Text>
                         </TouchableOpacity>
                         <Text style={{ marginLeft: 20 }}>_____________________________</Text>
-                        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("Login")}>
+                        <TouchableOpacity style={styles.option}>
                             <Image source={require('../images/logosesion.jpg')} style={styles.iconPerfil} />
                             <Text style={styles.optionText}>Cerrar Sesion</Text>
                         </TouchableOpacity>
@@ -84,17 +108,18 @@ export default function Profile() {
                     <Text style={styles.editPhotoText}>Editar Foto +</Text>
                 </View>
                 <Text>_____________________________________________</Text>
-                <Text style={styles.labeltop}>Cambia tus datos y edita tu informacion personal.</Text>
+                <Text style={styles.labeltop}>Cambia tus datos y edita tu información personal.</Text>
                 <View style={styles.inputContainer}>
                     <View style={styles.labelContainer}>
                         <Text style={styles.label}>Nombre</Text>
                     </View>
                     <TextInput
-                        style={[styles.input, styles.readOnlyInput]}
+                        style={styles.input}
                         value={name}
-                        placeholder="Nombre"
+                        onChangeText={setName}
+                        placeholder="Nuevo nombre"
                         placeholderTextColor="#6c757d"
-                        editable={false} 
+                        editable={true} 
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -102,12 +127,13 @@ export default function Profile() {
                         <Text style={styles.label}>Correo</Text>
                     </View>
                     <TextInput
-                        style={[styles.input, styles.readOnlyInput]}
+                        style={styles.input}
                         value={email}
-                        placeholder="Correo"
+                        onChangeText={setEmail}
+                        placeholder="Nuevo correo"
                         placeholderTextColor="#6c757d"
                         keyboardType="email-address"
-                        editable={false} 
+                        editable={true} 
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -115,17 +141,18 @@ export default function Profile() {
                         <Text style={styles.label}>Teléfono</Text>
                     </View>
                     <TextInput
-                        style={[styles.input, styles.readOnlyInput]}
+                        style={styles.input}
                         value={phone}
-                        placeholder="Teléfono"
+                        onChangeText={setPhone}
+                        placeholder="Nuevo número de teléfono"
                         placeholderTextColor="#6c757d"
-                        keyboardType="phone-pad"
-                        editable={false} // Campo de solo lectura
+                        keyboardType="default"
+                        editable={true} 
                     />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={[styles.button, styles.updateButton]} onPress={() => navigation.navigate("Actualizar")}>
-                        <Text style={styles.buttonText}>Actualizar</Text>
+                    <TouchableOpacity style={[styles.button, styles.updateButton]} onPress={handleUpdate}>
+                        <Text style={styles.buttonText}>{updating ? "Actualizando..." : "Actualizar"}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={() => navigation.navigate("Inicio")}>
                         <Text style={styles.buttonText}>Cancelar</Text>
@@ -255,9 +282,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#D9D9D9',
     },
-    readOnlyInput: {
-        color: 'gray', // Establece el color del texto a gris
-    },
     buttonContainer: {
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -287,3 +311,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
+
