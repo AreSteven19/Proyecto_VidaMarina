@@ -26,7 +26,7 @@ export default function Ayuda() {
 
                 <View style={styles.optionsContainer}>
                     <TouchableOpacity style={styles.option}>
-                        <Image source={require('../images/Info_logokevin.png')} style={styles.iconPerfil} />
+                        <Image source={require('../images/ayudaimagen.jpg')} style={styles.iconPerfil} />
                         <View style={styles.optionTextContainer}>
                             <Text style={styles.optionText}>Centro de Ayuda</Text>
                             <Text style={styles.optionText}>Obten Ayuda, Contactenos.</Text>

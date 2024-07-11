@@ -13,7 +13,7 @@ import Beneficios from './Navegacion/Beneficios';
 import Paises from "./Navegacion/Paises"; './Navegacion/Recuperar';
 import Acerca from './Navegacion/Acerca';
 import Ayudajs from './Navegacion/Ayudajs';
-
+import Actualizar from './Navegacion/Actualizar';
 
 
 
@@ -72,6 +72,11 @@ function Controlrutas() {
             <Stack.Screen
                 name="Ayudajs"
                 component={Ayudajs}
+                options={{ headerBackTitleVisible: false, headerShown: false }}
+            />
+                <Stack.Screen
+                name="Actualizar"
+                component={Actualizar}
                 options={{ headerBackTitleVisible: false, headerShown: false }}
             />
 

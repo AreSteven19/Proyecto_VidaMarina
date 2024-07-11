@@ -75,7 +75,7 @@ export default function Inicio() {
                     height={250}
                     width={"100%"}
                     play={false}
-                    videoId={'PDJwWzH96u0'} // ID del video de YouTube
+                    videoId={'PDJwWzH96u0'}
                 />
             </View>
 

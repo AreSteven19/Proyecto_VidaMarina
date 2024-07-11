@@ -20,6 +20,10 @@ export default function Paises() {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const getRandomInt = (minimo, maximo) => {
+        return Math.floor(Math.random() * (maximo - minimo + 1)) + minimo;
+    };
+
     useEffect(() => {
         if (query.length > 0) {
             setLoading(true);
@@ -29,7 +33,6 @@ export default function Paises() {
                     setLoading(false);
                 })
                 .catch(error => {
-                    console.error(error);
                     setLoading(false);
                 });
         } else {
@@ -45,14 +48,19 @@ export default function Paises() {
                     <Image style={styles.ImageLog} source={require("../images/logo.jpg")} />
                 </View>
                 <View style={styles.derecha}>
-                <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                         <Image style={styles.ImageLog2} source={require("../images/logouser.jpg")} />
                     </TouchableOpacity>
+                    <TextInput
+                        placeholder="Buscar"
+                        style={styles.txtInput}
+                        value={query}
+                        onChangeText={setQuery}
+                    />
                 </View>
             </View>
-
             <View style={styles.botones}>
-                <TouchableOpacity onPress={() => navigation.navigate("Inicio")} style={styles.btnLogin} >
+                <TouchableOpacity onPress={() => navigation.navigate("Inicio")} style={styles.btnLogin}>
                     <Text style={styles.boton}>Inicio</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("Beneficios")} style={styles.btnLogin}>
@@ -63,19 +71,18 @@ export default function Paises() {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("Acerca")} style={styles.btnLogin}>
                     <Text style={styles.boton}>Acerca de</Text>
-                </TouchableOpacity >
+                </TouchableOpacity>
             </View>
-
             <View style={styles.cuadropaises}>
                 <TouchableOpacity style={styles.botonespaises}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Total de paises</Text>
                     <Text style={styles.botonpais}>189 Paises</Text>
-                    <Text style={styles.botonpais}>+2% month over month</Text>
+                    <Text style={styles.botonpais}>que nos conforman</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.botonespaises}>
-                    <Text style={styles.botonpais}>Por Estado</Text>
-                    <Text style={styles.botonpais}>2,405</Text>
-                    <Text style={styles.botonpais}>+33% month over month</Text>
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Especies protegidas</Text>
+                    <Text style={styles.botonpais}>1,405</Text>
+                    <Text style={styles.botonpais}>+33%</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -91,19 +98,21 @@ export default function Paises() {
                     value={query}
                     onChangeText={setQuery}
                 />
-               
                 {loading ? (
                     <ActivityIndicator size="large" color="#0000ff" />
                 ) : (
                     <FlatList
                         data={countries}
                         keyExtractor={item => item.cca3}
-                        renderItem={({ item }) => (
-                            <View style={styles.listItem}>
-                                <Text style={styles.countryName}>{item.name.common}</Text>
-                                <Text style={styles.region}>{item.region}</Text>
-                            </View>
-                        )}
+                        renderItem={({ item }) => {
+                            const randomInt = getRandomInt(100, 1000);
+                            return (
+                                <View style={styles.listItem}>
+                                    <Text style={styles.countryName}>{item.name.common}</Text>
+                                    <Text>Especies maritimas protegidas: {randomInt}</Text>
+                                </View>
+                            );
+                        }}
                         ListEmptyComponent={!loading && <Text style={styles.noResults}>No se encontraron resultados</Text>}
                         contentContainerStyle={{ paddingBottom: 20 }}
                     />
@@ -144,6 +153,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#02A3C7",
         height: 150,
+        width: "100%", // Ancho completo
     },
     textologo: {
         color: "#FFFFFF",
@@ -212,7 +222,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         justifyContent: "center",
         marginLeft: 5,
-        marginRight: 5,
     },
     cuadropaises: {
         display: "flex",
@@ -233,7 +242,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 8,
         borderRadius: 4,
-        marginTop: 10, // Añadir margen para separar del cuadro
+        marginTop: 10, 
     },
     listItem: {
         padding: 16,
@@ -244,14 +253,20 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
-    region: {
-        fontSize: 16,
-        color: '#666',
-    },
     noResults: {
         textAlign: 'center',
         marginVertical: 20,
         fontSize: 18,
     },
+    txtInput: {
+        width: 180,
+        height: 40,
+        borderRadius: 10,
+        paddingLeft: 30,
+        marginTop: 30,
+        borderColor: "gray",
+        color: "#000000",
+        backgroundColor: "#FFFFFF",
+        fontSize: 17,
+    },
 });
-
