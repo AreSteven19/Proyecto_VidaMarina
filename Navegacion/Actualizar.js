@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { db } from '../ConexionDB'; // Asegúrate de importar tu configuración de Firebase
+import { db } from '../ConexionDB'; 
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 
 export default function Actualizar() {
 
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('Are@gmail.com'); // Inicialmente configurado para el email dado
+    const [email, setEmail] = useState('Are@gmail.com');
     const [phone, setPhone] = useState('');
-    const [loading, setLoading] = useState(true); // Comienza en true para mostrar el indicador de carga
+    const [loading, setLoading] = useState(true); 
     const [docId, setDocId] = useState(null);
     const [updating, setUpdating] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
@@ -27,14 +27,16 @@ export default function Actualizar() {
                     setDocId(userDoc.id);
                     setName(userData.Nombre);
                     setPhone(userData.Numero);
+                  
                 } else {
-                    console.log('No user found with the provided email');
+                    console.log('No se encontro el usuario');
                 }
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching user data: ", error);
                 setLoading(false);
             }
+
+           
         };
 
         fetchData();
@@ -53,7 +55,7 @@ export default function Actualizar() {
                 alert('Información actualizada');
                 setUpdating(false);
             } catch (error) {
-                console.error("Error updating document: ", error);
+                console.error("Error al actualizar los datos: ", error);
                 alert('Error actualizando la información');
                 setUpdating(false);
             }
@@ -152,7 +154,7 @@ export default function Actualizar() {
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={[styles.button, styles.updateButton]} onPress={handleUpdate}>
-                        <Text style={styles.buttonText}>{updating ? "Actualizando..." : "Actualizar"}</Text>
+                        <Text style={styles.buttonText}>{updating ? "Actualizando Información..." : "Actualizar"}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={() => navigation.navigate("Inicio")}>
                         <Text style={styles.buttonText}>Cancelar</Text>

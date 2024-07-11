@@ -89,7 +89,7 @@ export default function Beneficio() {
                             }
                         ]
                     }}
-                    width={Dimensions.get('window').width - 30}
+                    width={Dimensions.get('window').width - 20}
                     height={220}
                     yAxisLabel="$"
                     chartConfig={{
